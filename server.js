@@ -1,5 +1,6 @@
 const express = require("express");
 const errorHandle = require("./middleware/error.handler");
+const connectDB = require("./config/dbConnection");
 
 const dotenv = require("dotenv").config();
 //https://www.youtube.com/watch?v=H9M02of22z4
@@ -7,7 +8,7 @@ const dotenv = require("dotenv").config();
 console.log("Hello World");
 
 
-
+connectDB();
 const app = express();
 
 const port = process.env.PORT || 3000;
