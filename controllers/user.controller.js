@@ -73,13 +73,14 @@ const loginUser = asyncHandler(async (req, res) => {
 /**
  * @description current user
  * @route GET /api/users/current
- * @access Public
+ * @access private
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
-const currentUser = asyncHandler(async (req, res) => {
-    console.log('get current')
-    res.json({message: "current user information"});
+const current = asyncHandler(async (req, res) => {
+
+    console.log('get current');
+    res.json(req.user);
 });
 
 module.exports = {
