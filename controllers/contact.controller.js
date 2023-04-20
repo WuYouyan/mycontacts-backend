@@ -4,21 +4,21 @@ const Contact = require("../models/contactModel");
 /**
  * @description Get all contacts
  * @route GET /api/contacts
- * @access Public
+ * @access private
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
 const getContacts = asyncHandler(async (req, res) => {
     // res.send("Get all contacts");
     // res.json({ message: "Get all contacts"});
-    const contacts = await Contact.find();
+    const contacts = await Contact.find({user_id: req.user.id});
     res.status(200).json(contacts);
 });
 
 /**
  * @description Get contact
  * @route GET /api/contacts/:id
- * @access Public
+ * @access private
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
@@ -34,7 +34,7 @@ const getContact = asyncHandler(async (req, res) => {
 /**
  * @description Create contact
  * @route POST /api/contacts
- * @access Public
+ * @access private
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  * @
@@ -48,6 +48,7 @@ const createContact = asyncHandler(async (req, res) => {
         throw new Error("All fields are mandatory !");
     }
     const contact = await Contact.create({
+        user_id: req.user.id,
         name,
         email,
         phone
@@ -57,7 +58,7 @@ const createContact = asyncHandler(async (req, res) => {
 /**
  * @description Update contact
  * @route PUT /api/contacts/:id
- * @access Public
+ * @access private
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
@@ -82,7 +83,7 @@ const updateContact = asyncHandler(async (req, res) => {
 /**
  * @description Delete contact
  * @route DELETE /api/contacts/:id
- * @access Public
+ * @access private
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
